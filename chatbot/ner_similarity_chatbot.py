@@ -5,7 +5,6 @@ import os
 from sentence_transformers import SentenceTransformer
 from ner import extract_ner_from_text  
 
-# ✅ 전역 설정
 FAISS_INDEX_PATH = "news_index_final.faiss"
 PICKLE_PATH = "news_data_final.pkl"
 MODEL_NAME = "jhgan/ko-sroberta-multitask"
@@ -19,11 +18,9 @@ else:
     faiss_index = None
     news_df = None
 
-# ✅ 임베딩 정규화 함수
 def normalize_embeddings(embeddings: np.ndarray) -> np.ndarray:
     return embeddings / np.linalg.norm(embeddings, axis=1, keepdims=True)
 
-# ✅ 가중치 기반 쿼리 생성 함수
 def generate_weighted_query(text: str, top_companies: list):
     """
     GPT에서 받은 top 2 기업에 높은 가중치, person_ner 인물은 낮은 가중치로 쿼리 생성
@@ -31,12 +28,12 @@ def generate_weighted_query(text: str, top_companies: list):
     """
     _, person_ner = extract_ner_from_text(text)
 
-    # 기업 키워드 (각 5회 반복)
+
     weighted_company = []
     for comp in top_companies:
         weighted_company.extend([comp] * 5)
 
-    # 인물 키워드 (최대 1명, 2회 반복)
+
     weighted_person = []
     if person_ner:
         top_person = max(person_ner, key=person_ner.get)
@@ -44,9 +41,7 @@ def generate_weighted_query(text: str, top_companies: list):
 
     return " ".join(weighted_company + weighted_person)
 
-# ✅ 뉴스 검색 함수 (headline과 link만 반환)
 def find_similar_news(query: str, top_k: int = 10, final_n: int = 4):
-    # ✅ 모델 및 인덱스 전역 로딩
     model = SentenceTransformer(MODEL_NAME)
     embedding_dim = model.get_sentence_embedding_dimension()
     
