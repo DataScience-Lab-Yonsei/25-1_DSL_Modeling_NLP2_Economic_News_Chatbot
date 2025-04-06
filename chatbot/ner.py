@@ -1,11 +1,10 @@
-# klue_roberta_ner.py
+
 import torch
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 
-# 모델 및 토크나이저 초기화 (soddokayo/klue-roberta-base-ner 사용)
 model_name = "soddokayo/klue-roberta-base-ner"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 tokenizer = AutoTokenizer.from_pretrained(model_name)
