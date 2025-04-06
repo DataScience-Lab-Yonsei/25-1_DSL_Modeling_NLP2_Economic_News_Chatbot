@@ -20,32 +20,32 @@ Streamlit 기반의 대화형 경제 뉴스 챗봇 서비스를 구현했습니�
 ---
 
 ## Intro  
-<img src="https://github.com/user-attachments/assets/cb013f1b-18ca-406c-9ab0-31a04aeae4f3" width="600"/>
+<img src="https://github.com/user-attachments/assets/cb013f1b-18ca-406c-9ab0-31a04aeae4f3" style="max-width:100%;"/>
 
 ---
 
 ## Data Crawling  
-<img src="https://github.com/user-attachments/assets/5d32f110-7437-4954-bc6f-ee7ec1d34207" width="600"/>
-<img src="https://github.com/user-attachments/assets/1b8adacc-2cbe-471b-afa3-875bdeb0830b" width="600"/>
+<img src="https://github.com/user-attachments/assets/5d32f110-7437-4954-bc6f-ee7ec1d34207" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/1b8adacc-2cbe-471b-afa3-875bdeb0830b" style="max-width:100%;"/>
 
 ---
 
 ## Pipeline  
-<img src="https://github.com/user-attachments/assets/e6d5582e-c266-4324-9292-1943d0108ece" width="600"/>
+<img src="https://github.com/user-attachments/assets/e6d5582e-c266-4324-9292-1943d0108ece" style="max-width:100%;"/>
 
 ---
 
 ## Modeling  
-<img src="https://github.com/user-attachments/assets/273ed96a-a9c0-46e4-9bdb-43af3ba9ee8c" width="600"/>
-<img src="https://github.com/user-attachments/assets/5b941a46-2c24-4e6a-bee4-d96fdba04492" width="600"/>
-<img src="https://github.com/user-attachments/assets/66c34a15-9445-4b80-b812-e5a9afd43104" width="600"/>
-<img src="https://github.com/user-attachments/assets/6cddc00d-7e15-450b-ae2c-8fad9cdd706f" width="600"/>
-<img src="https://github.com/user-attachments/assets/9d1c7d40-3553-4f18-82c4-48bb142f4fc6" width="600"/>
-<img src="https://github.com/user-attachments/assets/015752c9-53aa-44af-9762-7a9656d910b4" width="600"/>
-<img src="https://github.com/user-attachments/assets/ba9b42f9-78b6-4f52-88a1-98d90f7056cb" width="600"/>
-<img src="https://github.com/user-attachments/assets/0ecbb3f3-c4e7-48d9-98e4-a8b0be0e1e3c" width="600"/>
+<img src="https://github.com/user-attachments/assets/273ed96a-a9c0-46e4-9bdb-43af3ba9ee8c" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/5b941a46-2c24-4e6a-bee4-d96fdba04492" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/66c34a15-9445-4b80-b812-e5a9afd43104" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/6cddc00d-7e15-450b-ae2c-8fad9cdd706f" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/9d1c7d40-3553-4f18-82c4-48bb142f4fc6" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/015752c9-53aa-44af-9762-7a9656d910b4" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/ba9b42f9-78b6-4f52-88a1-98d90f7056cb" style="max-width:100%;"/>
+<img src="https://github.com/user-attachments/assets/0ecbb3f3-c4e7-48d9-98e4-a8b0be0e1e3c" style="max-width:100%;"/>
 
 ---
 
 ## Conclusion and Limitation  
-<img src="https://github.com/user-attachments/assets/a3114122-b091-4fd8-90c6-1ff6d9740fea" width="600"/>
+<img src="https://github.com/user-attachments/assets/a3114122-b091-4fd8-90c6-1ff6d9740fea" style="max-width:100%;"/>
