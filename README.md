@@ -10,12 +10,12 @@ Streamlit 기반의 대화형 경제 뉴스 챗봇 서비스를 구현했습니�
 ---
 
 ## Coverpage  
-<img src="https://github.com/user-attachments/assets/d76c2d3a-ff30-4370-b4d2-9633b889927f" width="600"/>
+<img src="https://github.com/user-attachments/assets/d76c2d3a-ff30-4370-b4d2-9633b889927f" style="max-width:100%;"/>
 
 ---
 
 ## Content  
-<img src="https://github.com/user-attachments/assets/b4dca9cd-5c4d-48df-b739-1bc4d17aba17" width="600"/>
+<img src="https://github.com/user-attachments/assets/b4dca9cd-5c4d-48df-b739-1bc4d17aba17" style="max-width:100%;"/>
 
 ---
 
