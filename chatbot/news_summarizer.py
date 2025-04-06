@@ -1,4 +1,3 @@
-
 from langchain.chat_models import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
@@ -9,14 +8,11 @@ from dotenv import load_dotenv
 import os
 import openai
 
-# ✅ 환경변수 로드
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# ✅ LangChain LLM 모델 설정
 llm = ChatOpenAI(model_name="gpt-4o")
 
-# ✅ 요약 프롬프트 템플릿
 summary_prompt = PromptTemplate(
     input_variables=["news_article"],
     template="""
@@ -35,7 +31,6 @@ summary_prompt = PromptTemplate(
     """
 )
 
-# ✅ LangChain 요약 체인 생성
 summary_chain = LLMChain(llm=llm, prompt=summary_prompt)
 
 # ✅ 요약 함수 정의
