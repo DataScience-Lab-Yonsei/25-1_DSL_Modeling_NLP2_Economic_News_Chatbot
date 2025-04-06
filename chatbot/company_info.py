@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 import os
 import openai
 
-# ✅ 환경변수 로드
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -12,8 +11,6 @@ def get_company_info(top_companies):
     """
     if not top_companies:
         return []
-
-    # 📌 GPT 프롬프트 구성
     prompt = f"""
     다음은 뉴스 기사에서 추출된 고유명사들과 그 등장 빈도입니다.
 
@@ -47,7 +44,6 @@ def get_company_info(top_companies):
     {top_companies}
     """
 
-    # ✅ 최신 OpenAI API 사용 방식
     client = openai.OpenAI()  # ✅ 클라이언트 객체 생성 (V1 방식)
     response = client.chat.completions.create(
         model="gpt-4o",
@@ -57,6 +53,5 @@ def get_company_info(top_companies):
         ]
     )
 
-    # ✅ GPT 응답 반환
     company_info = response.choices[0].message.content.strip()
     return company_info
