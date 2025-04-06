@@ -11,12 +11,10 @@ from dotenv import load_dotenv
 import os
 import openai
 
-# ✅ 환경변수 로드
 load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI()
 
-# ✅ 금융 용어 추출 함수
 def extract_financial_terms(news_article):
     prompt = f"""
     당신은 경제용어를 정확히 알고있는 경제전문가입니다. 아래 triple backticks로 구분된 경제기사에서 중요한 경제 용어나 개념을 추출해주세요.
@@ -35,7 +33,6 @@ def extract_financial_terms(news_article):
 
     """
 
-    # ✅ OpenAI API 호출
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
@@ -44,13 +41,10 @@ def extract_financial_terms(news_article):
         ]
     )
 
-    # ✅ GPT 응답에서 용어 추출
     extracted_terms = response.choices[0].message.content.strip()
 
-    # ✅ 세미콜론을 기준으로 리스트 변환
     terms_list = [term.strip() for term in extracted_terms.split(';') if term.strip()]
 
-    # ✅ 다수의 GPT 호출을 통한 용어 빈도 분석
     all_terms = []
     for _ in range(10):
         response = client.chat.completions.create(
@@ -61,22 +55,17 @@ def extract_financial_terms(news_article):
         terms_list = [term.strip() for term in response_terms.split(';') if term.strip()]
         all_terms.extend(terms_list)
 
-    # ✅ 빈도수 계산하여 상위 3개 용어 선택
     term_counts = Counter(all_terms)
     top_3_terms = [term for term, _ in term_counts.most_common(3)]
 
     return top_3_terms
 
-
-# BGE-M3 모델 로드
 model = SentenceTransformer("BAAI/bge-m3")
 
-# 참조문서
 file_path = "경제용어700선.txt"
 with open(file_path, "r", encoding="utf-8") as f:
     text = f.read()
 
-# 용어 및 설명 분리
 entries = re.split(r"\n\*\*(.+?)\*\*\n", text)
 terms, docs, related_keywords = [], [], []
 for i in range(1, len(entries), 2):
@@ -86,7 +75,6 @@ for i in range(1, len(entries), 2):
     terms.append(term)
     docs.append(desc_clean.strip())
 
-    # 연관검색어 추출
     match = re.search(r'연관검색어\s*[:：]\s*(.+)', desc_raw)
     if match:
         keywords = [kw.strip() for kw in re.split(r'[ ,/]', match.group(1)) if kw.strip()]
@@ -94,7 +82,6 @@ for i in range(1, len(entries), 2):
         keywords = []
     related_keywords.append(keywords)
 
-# 용어 매핑 사전 구성 (괄호 포함 용어 대응)
 term_map = {}  # 예: {'유럽연합': idx, 'EU': idx, '유럽연합(EU)': idx}
 for i, term in enumerate(terms):
     term_map[term] = i
@@ -104,12 +91,10 @@ for i, term in enumerate(terms):
         term_map[base.strip()] = i
         term_map[alias.strip()] = i
 
-# 사전 임베딩, FAISS index 로드
 doc_embeddings = np.load("doc_embeddings.npy")
 index = faiss.read_index("faiss_index.index")
 index.add(doc_embeddings)
 
-# docs 설명 기반 유사 용어 추천 함수 (단어가 docs에 있지만 연관검색어가 없는 경우)
 def suggest_similar_terms(query, top_k=5, threshold=0.5):
     query_idx = terms.index(query)
     query_description = docs[query_idx]
@@ -124,7 +109,6 @@ def suggest_similar_terms(query, top_k=5, threshold=0.5):
     return results
 
 
-# GPT 설명 생성 함수 (사전에 없는 단어 설명)
 def explain_query_with_gpt(query):
     prompt = f"""
     '{query}'는 경제지식이 거의 없는 초보자가 경제기사를 읽던 도중 궁금해하는 단어입니다. '{query}'에 대해 경제 초보자가 이해하기 쉽게 설명해 주세요.
@@ -139,8 +123,6 @@ def explain_query_with_gpt(query):
         temperature=1.0
     )
     return response.choices[0].message.content
-
-# GPT 설명 기반 유사 단어 추천 함수
 def suggest_similar_by_gpt_description(query, top_k=5, threshold=0.5):
     query_explained = explain_query_with_gpt(query)
     query_emb = model.encode([query_explained], convert_to_numpy=True)
@@ -151,8 +133,7 @@ def suggest_similar_by_gpt_description(query, top_k=5, threshold=0.5):
         if similarities[idx] >= threshold:
             results.append((terms[idx], round(float(similarities[idx]), 3)))
     return results
-
-# 유사 용어 추천함수 (모든 경우의 수)
+    
 def recommend_similar_words(query, top_k=5):
     if query in term_map:
         # print("이 용어는 경제사전에 있는 단어입니다.\n")
@@ -169,7 +150,7 @@ def recommend_similar_words(query, top_k=5):
         related = [term for term, _ in suggest_similar_by_gpt_description(query, top_k=5, threshold=0.5)[:2]]
     return gpt_desc, related
 
-# 답변 생성함수
+
 def generate_answer(query, model="gpt-4o"):
     desc, related = recommend_similar_words(query)
 
